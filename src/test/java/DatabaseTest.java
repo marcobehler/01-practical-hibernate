@@ -82,6 +82,29 @@ public class DatabaseTest {
         System.out.println("Our user got a new database id[=" + user.getId() + "]");
     }
 
+
+
+    @Test
+    public void test_delete_user() {
+        User user = new User();
+        user.setEmail("some@user.com");
+        user.setPassword("s3cr3t");
+
+        try (Session session = sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.save(user);
+            tx.commit();
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
+
+            session.delete(user);
+            //session.createQuery("delete from User where id = :id").setParameter("id", user.getId()).executeUpdate();
+            tx.commit();
+        }
+    }
+
     @Test
     public void test_load_and_update_user() {
         User user = new User();
