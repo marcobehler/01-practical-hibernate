@@ -99,8 +99,8 @@ public class DatabaseTest {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
 
-            session.delete(user);
-            //session.createQuery("delete from User where id = :id").setParameter("id", user.getId()).executeUpdate();
+          //  session.delete(user);
+            session.createQuery("delete from User where id = :id").setParameter("id", user.getId()).executeUpdate();
             tx.commit();
         }
     }
